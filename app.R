@@ -86,9 +86,9 @@ server <- function(input, output) {
       tags$div()
     } else {
       animal_tags <- lapply(animal_list(), function(animal) {
-        heart_width <- 10 + 10 * click_count[[animal]]
+        heart_width <- 10 + 15 * click_count[[animal]]
         style_img_heart <- paste0("width: ", heart_width, "px;", " margin-left: -150px; margin-top: 40px")
-        style_img_animal <-  "height: 200px; cursor: pointer;"
+        style_img_animal <-  "height: 150px; margin-top: 10px; cursor: pointer;"
         fluidRow(
           column(
             width = 6, 
@@ -119,7 +119,7 @@ server <- function(input, output) {
   shinyjs::onclick("shiny_img", click_count_shiny(click_count_shiny() + 1))
 
   output$heart_shiny <- renderUI({
-    style <- paste0("width: ", 1 + 10 * click_count_shiny(), "px;", " margin-left: -120px; margin-top: 1px")
+    style <- paste0("width: ", 1 + 20 * click_count_shiny(), "px;", " margin-left: -120px; margin-top: 1px")
     tags$img(src = "heart.svg", id = "love",  style = style)
   })
 }

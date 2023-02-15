@@ -1,0 +1,31 @@
+.row img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.col {
+  float: left;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.add-animals-btn {
+  background-color: #9ac9ff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 6px 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.add-animals-btn:hover {
+  background-color: #78b6ff;
+}
+

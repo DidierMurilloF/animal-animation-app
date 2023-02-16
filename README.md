@@ -7,6 +7,8 @@ an animal, a heart will appear and the selected animal will be added to
 the list below. You can add up to five animals to the list, and each
 animal will appear with its own heart.
 
+![](www/animalsApp.png)
+
 ## Key Concepts
 
 The Animal Animation App uses the following key concepts in Shiny:
@@ -63,6 +65,6 @@ To install these packages, run the following command:
 
 ## Credits
 
-The Animal Animation App was created by Didier Murillo and inspired by
+The Animal Animation Shiny App was inspired by one of the sections from
 the Udemy course “Modern React with Redux” by Stephen Grider. Feel free
 to use, modify, and distribute the app as you like.

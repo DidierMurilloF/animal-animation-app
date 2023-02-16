@@ -8,34 +8,40 @@ library(shinyjs)
 
 # Define the client side
 ui <- fluidPage(
-  # Enable shinyjs
-  shinyjs::useShinyjs(),
-  includeCSS("www/style.css"),
-  br(),
-  div(
-    class = "container",
-    fluidRow(
-      column(width = 6,  tags$h2("Welcome to the Animal Animation Shiny App!")),
-      column(
-        width = 4,  
-        tags$img(
-          src="https://raw.githubusercontent.com/rstudio/hex-stickers/main/SVG/shiny.svg", 
-          id = "shiny_img", 
-          style = "width: 100px; cursor: pointer;"
+    shinyjs::useShinyjs(),
+    includeCSS("www/style.css"),
+    div(
+        class = "container",
+        div(
+            class = "row",
+            div(
+                class = "col-sm-6",
+                tags$h2("Welcome to the Animal Animation Shiny App!")
+            ),
+            div(
+                class = "col-sm-4",
+                tags$img(
+                    src = "https://raw.githubusercontent.com/rstudio/hex-stickers/main/SVG/shiny.svg",
+                    id = "shiny_img",
+                    style = "width: 100px; margin-top: 10px; cursor: pointer;"
+                )
+            ),
+            div(
+                class = "col-sm-2",
+                uiOutput("heart_shiny")
+            )
+        ),
+        actionButton(
+            inputId = "add_animals", 
+            label = "Add Animals", 
+            class = "add-animals-btn"
+        ),
+        br(),
+        conditionalPanel(
+            condition = "JS(output.animal_list.length > 0)",
+            uiOutput("animal_list")
         )
-      ),
-      column(
-        width = 2, 
-        uiOutput("heart_shiny")
-      )
-    ),
-    actionButton(inputId = "add_animals", label = "Add Animals", class = "my-btn-class"),
-    br(),
-    conditionalPanel(
-      condition = "JS(output.animal_list.length > 0)",
-      uiOutput("animal_list")
     )
-  )
 )
 
 # Define the server side
@@ -53,6 +59,7 @@ server <- function(input, output) {
   # Define a reactive value to track the number of times the "Add Animals" button has been clicked
   button_count <- reactiveVal(0)
   
+  # Shuffle the list of animals
   random_animals <- sample(animals)
   
   # Add a new animal to the list each time the "Add Animals" button is clicked
@@ -61,7 +68,6 @@ server <- function(input, output) {
     #animal <- sample(animals, 1)
     if (button_count() <= 5) {
       animal_list(c(animal_list(), random_animals[button_count()]))
-      print(animal_list())
     } else {
       showModal(modalDialog(
         "No more animals!",
@@ -89,22 +95,28 @@ server <- function(input, output) {
         heart_width <- 10 + 15 * click_count[[animal]]
         style_img_heart <- paste0("width: ", heart_width, "px;", " margin-left: -150px; margin-top: 40px")
         style_img_animal <-  "height: 150px; margin-top: 10px; cursor: pointer;"
-        fluidRow(
-          column(
-            width = 6, 
-            tags$img(
-              src = paste0(animal, ".svg"), 
-              style = style_img_animal, id = animal
+        div(
+            class = "row",
+            div(
+                class = "col-sm-6",
+                div(
+                    tags$img(
+                    src = paste0(animal, ".svg"),
+                    style = style_img_animal,
+                    id = animal
+                    )
+                )
+            ),
+            div(
+                class = "col-sm-6",
+                div(
+                    tags$img(
+                        src = "heart.svg",
+                        style = style_img_heart,
+                        id = paste0(animal, "_heart")
+                    )
+                )
             )
-          ),
-          column(
-            width = 6,  
-            tags$img(
-              src = "heart.svg", 
-              style = style_img_heart, 
-              id = paste0(animal, "_heart")
-            )
-          )
         )
       })
       do.call(tags$div, animal_tags)
@@ -119,7 +131,7 @@ server <- function(input, output) {
   shinyjs::onclick("shiny_img", click_count_shiny(click_count_shiny() + 1))
 
   output$heart_shiny <- renderUI({
-    style <- paste0("width: ", 1 + 20 * click_count_shiny(), "px;", " margin-left: -120px; margin-top: 1px")
+    style <- paste0("width: ", 1 + 20 * click_count_shiny(), "px;", " margin-left: -120px; margin-top: 5px")
     tags$img(src = "heart.svg", id = "love",  style = style)
   })
 }

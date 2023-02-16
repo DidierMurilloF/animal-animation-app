@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This is a simple Shiny app that lets you create your own custom animal animation by clicking on different animal images. Each time you click on an animal, a heart will appear and the selected animal will be added to the list below. You can add up to five animals to the list, and each animal will appear with its own heart.
 
-![](www/animalsApp.png)
+![animals](www/animalsApp.png)
 
 ## Key Concepts
 

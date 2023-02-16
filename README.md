@@ -63,6 +63,4 @@ To install these packages, run the following command:
 
 ## Credits
 
-The Animal Animation App was created by Didier Murillo and inspired by
-the Udemy course “Modern React with Redux” by Stephen Grider. Feel free
-to use, modify, and distribute the app as you like.
+The Animal Animation Shiny App was inspired by one of the sections from the Udemy course “Modern React with Redux” by Stephen Grider. Feel free to use, modify, and distribute the app as you like.
